@@ -6,7 +6,7 @@ The website showcases services ranging from industrial electrical infrastructure
 
 ---
 
-## 🚀 Key Features
+##  Key Features
 
 *   **Proximity-Sensitive Bulb**: A custom SVG lightbulb that dynamically adjusts its filament glow, opacity, and warm drop-shadow in real-time based on cursor distance.
 *   **Staggered Curtain Transitions**: Premium glassmorphic column slide animations that wipe across the screen to teleport the scroll position smoothly.
@@ -14,7 +14,7 @@ The website showcases services ranging from industrial electrical infrastructure
 *   **60FPS Visual Performance**: Smooth animations achieved purely through lightweight CSS transitions and native JavaScript math, avoiding heavy external library loops.
 *   **Fully Responsive & SEO Optimized**: Semantic HTML5 structure tailored to look flawless on both desktop monitors and mobile devices.
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 *   **HTML5** - Semantic markup & custom inline SVGs
 *   **Vanilla CSS3** - CSS Custom Properties (HSL colors), modern layouts, and fluid transitions
