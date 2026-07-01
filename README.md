@@ -4,7 +4,8 @@ A professional, modern corporate landing page designed for **Lorem Elektrik**, a
 
 The website showcases services ranging from industrial electrical infrastructure to smart home renovations, utilizing rich micro-interactions and smooth, high-performance transitions.
 
----
+---<img width="1269" height="676" alt="Ekran görüntüsü 2026-07-01 162555" src="https://github.com/user-attachments/assets/3acce2dd-65bb-4164-abed-318f84d925e0" />
+
 
 ##  Key Features
 
