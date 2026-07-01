@@ -194,7 +194,29 @@ document.addEventListener('DOMContentLoaded', () => {
   internalLinks.forEach(link => {
     link.addEventListener('click', (e) => {
       const targetId = link.getAttribute('href');
-      if (targetId === '#') return; // Ignore empty jumps
+      
+      // Handle Ana Sayfa / Top scroll jump
+      if (targetId === '#') {
+        e.preventDefault();
+        
+        transitionOverlay.classList.remove('glass-transition--active-out');
+        transitionOverlay.classList.add('glass-transition--active');
+
+        setTimeout(() => {
+          document.documentElement.style.scrollBehavior = 'auto';
+          window.scrollTo(0, 0);
+
+          navLinks.forEach(l => l.classList.remove('header__link--active'));
+          link.classList.add('header__link--active');
+          document.documentElement.style.scrollBehavior = 'smooth';
+        }, 450);
+
+        setTimeout(() => {
+          transitionOverlay.classList.add('glass-transition--active-out');
+          transitionOverlay.classList.remove('glass-transition--active');
+        }, 850);
+        return;
+      }
 
       const targetSection = document.querySelector(targetId);
       if (targetSection) {
@@ -225,5 +247,54 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
+
+  // 7. Scrollspy to dynamically update active header nav item on scroll
+  const mainSections = document.querySelectorAll('main > section[id]');
+  
+  const updateActiveLink = () => {
+    const scrollPosition = window.scrollY + 160;
+
+    // Force Ana Sayfa active when scrolled to the top
+    if (window.scrollY < 200) {
+      navLinks.forEach(link => {
+        if (link.getAttribute('href') === '#') {
+          link.classList.add('header__link--active');
+        } else {
+          link.classList.remove('header__link--active');
+        }
+      });
+      return;
+    }
+
+    let activeSectionId = '';
+    mainSections.forEach(section => {
+      const top = section.offsetTop;
+      const height = section.offsetHeight;
+
+      if (scrollPosition >= top && scrollPosition < top + height) {
+        activeSectionId = section.getAttribute('id');
+      }
+    });
+
+    if (activeSectionId) {
+      navLinks.forEach(link => {
+        const href = link.getAttribute('href');
+        if (href === `#${activeSectionId}`) {
+          link.classList.add('header__link--active');
+        } else {
+          link.classList.remove('header__link--active');
+        }
+      });
+    }
+  };
+
+  let scrollFrame;
+  window.addEventListener('scroll', () => {
+    if (scrollFrame) {
+      window.cancelAnimationFrame(scrollFrame);
+    }
+    scrollFrame = window.requestAnimationFrame(updateActiveLink);
+  });
+  updateActiveLink(); // Initial check
 });
 
