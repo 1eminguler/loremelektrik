@@ -22,6 +22,7 @@
                 <a href="#" class="header__link header__link--active">Ana Sayfa</a>
                 <a href="#hizmetler" class="header__link">Hizmetlerimiz</a>
                 <a href="#hakkimizda" class="header__link">Hakkımızda</a>
+                <a href="#proje-danis" class="header__link">Proje Danış</a>
                 <a href="#iletisim" class="header__link">İletişim</a>
             </nav>
             <button class="header__toggle" aria-label="Menüyü Aç/Kapat">
@@ -34,68 +35,33 @@
 
     <main>
         <section class="hero">
-            <!-- Floating Aura mesh glows -->
-            <div class="hero__aura-mesh"></div>
-            <div class="hero__aura-mesh hero__aura-mesh--secondary"></div>
-
             <div class="container hero__container-split">
+                <!-- Isolated floating lightbulb at top-left of grid/content -->
+                <div class="hero__bulb-card" id="hero-bulb-container">
+                    <svg class="hero__bulb-svg" viewBox="0 0 100 100">
+                        <circle class="bulb-glow" cx="50" cy="45" r="30" fill="var(--accent)" opacity="0.1" />
+                        <path class="bulb-outline" d="M 35,45 C 35,30 65,30 65,45 C 65,55 58,60 55,65 L 55,72 L 45,72 L 45,65 C 42,60 35,55 35,45 Z" fill="none" stroke="#fff" stroke-width="3" />
+                        <rect x="45" y="72" width="10" height="3" fill="#888" />
+                        <rect x="46" y="75" width="8" height="3" fill="#666" />
+                        <path d="M 48,78 C 48,80 52,80 52,78" fill="none" stroke="#444" stroke-width="2" />
+                        <path class="bulb-filament" d="M 47,60 L 48,45 L 52,45 L 53,60" fill="none" stroke="#888" stroke-width="2" />
+                        <g class="bulb-rays" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round" opacity="0.2">
+                            <line x1="50" y1="15" x2="50" y2="22" />
+                            <line x1="20" y1="45" x2="27" y2="45" />
+                            <line x1="80" y1="45" x2="73" y2="45" />
+                            <line x1="29" y1="24" x2="34" y2="29" />
+                            <line x1="71" y1="24" x2="66" y2="29" />
+                        </g>
+                    </svg>
+                </div>
+
                 <div class="hero__split-left">
-                    <span class="hero__badge">Baştan Sona Profosyonel Teknik Destek</span>
-                    <h1 class="hero__title">Modern Endüstriyel İnşaat ve <span>Tadilat</span></h1>
-                    <p class="hero__desc">Lorem Elektrik olarak, 10 yılı aşkın tecrübemiz ve mühendislik odaklı vizyonumuzla yarının enerji altyapılarını güvenle inşa ediyoruz.</p>
+                    <span class="hero__badge">Mahallenizin Güvenilir Elektrikçisi</span>
+                    <h1 class="hero__title">Evinizin ve İş Yerinizin <span>Elektrikçisi</span></h1>
+                    <p class="hero__desc">Lorem Elektrik olarak, 10 yılı aşkın tecrübemiz ve güler yüzlü hizmetimizle ev tadilatları, arıza çözümleri ve akıllı ev kurulumlarını güvenle yapıyoruz.</p>
                     <div class="hero__actions">
                         <a href="#hizmetler" class="btn btn--primary">Hizmetlerimiz</a>
-                        <a href="#iletisim" class="btn btn--outline">Bizimle İletişime Geçin</a>
-                    </div>
-                </div>
-                
-                <div class="hero__split-right">
-                    <!-- Glassmorphic Cyber Card -->
-                    <div class="cyber-card">
-                        <div class="cyber-card__glow-mesh"></div>
-                        <div class="cyber-card__inner">
-                            <div class="cyber-card__header">
-                                <span class="cyber-card__dot cyber-card__dot--red"></span>
-                                <span class="cyber-card__dot cyber-card__dot--yellow"></span>
-                                <span class="cyber-card__dot cyber-card__dot--green"></span>
-                                <span class="cyber-card__title">LOREM SYSTEM CONTROL</span>
-                            </div>
-                            <div class="cyber-card__body">
-                                <!-- Glowing Circuit Board SVG -->
-                                <svg class="cyber-card__circuit" viewBox="0 0 400 300">
-                                    <!-- Grid lines for background -->
-                                    <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
-                                        <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(255, 255, 255, 0.03)" stroke-width="1"/>
-                                    </pattern>
-                                    <rect width="100%" height="100%" fill="url(#grid)" />
-                                    
-                                    <!-- Circuit tracks -->
-                                    <path class="circuit-track circuit-track--1" d="M 50,50 L 150,50 L 200,100 L 200,200 L 250,250 L 350,250" />
-                                    <path class="circuit-track circuit-track--2" d="M 50,250 L 120,250 L 170,200 L 170,100 L 220,50 L 350,50" />
-                                    <path class="circuit-track circuit-track--3" d="M 50,150 L 350,150" />
-                                    
-                                    <!-- Moving energy pulse particles -->
-                                    <circle class="circuit-pulse circuit-pulse--1" r="4" fill="#ff9f0a" />
-                                    <circle class="circuit-pulse circuit-pulse--2" r="4" fill="#00f2fe" />
-                                    <circle class="circuit-pulse circuit-pulse--3" r="3.5" fill="#30d158" />
-                                    
-                                    <!-- Glowing nodes -->
-                                    <circle cx="50" cy="50" r="5" fill="#ff9f0a" class="circuit-node" />
-                                    <circle cx="350" cy="250" r="5" fill="#ff9f0a" class="circuit-node" />
-                                    <circle cx="50" cy="250" r="5" fill="#00f2fe" class="circuit-node" />
-                                    <circle cx="350" cy="50" r="5" fill="#00f2fe" class="circuit-node" />
-                                    <circle cx="50" cy="150" r="5" fill="#30d158" class="circuit-node" />
-                                    <circle cx="350" cy="150" r="5" fill="#30d158" class="circuit-node" />
-                                </svg>
-                                <div class="cyber-card__status">
-                                    <div class="status-indicator">
-                                        <span class="status-indicator__pulse"></span>
-                                        <span class="status-indicator__text">GÜÇ AKIŞI AKTİF</span>
-                                    </div>
-                                    <div class="status-metric">230V / 50Hz</div>
-                                </div>
-                            </div>
-                        </div>
+                        <a href="#proje-danis" class="btn btn--outline">Proje Danışın</a>
                     </div>
                 </div>
             </div>
@@ -175,6 +141,47 @@
             </div>
         </section>
 
+        <section id="proje-danis" class="section reveal-on-scroll">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-header__title">Proje Danışın</h2>
+                    <p class="section-header__subtitle">Evinizin veya iş yerinizin elektrik tesisatı, tadilat veya akıllı ev kurulumları için bizden ücretsiz fiyat teklifi alabilirsiniz.</p>
+                </div>
+                <div class="consult__container">
+                    <form class="consult__form" novalidate>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <input type="text" id="consult-name" class="form-input" placeholder="Adınız Soyadınız" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" id="consult-email" class="form-input" placeholder="E-posta Adresiniz" required>
+                            </div>
+                        </div>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <input type="text" id="consult-phone" class="form-input" placeholder="Telefon Numaranız" required>
+                            </div>
+                            <div class="form-group">
+                                <select id="consult-type" class="form-input" required>
+                                    <option value="" disabled selected>Proje Tipi Seçin</option>
+                                    <option value="tadilat">Elektrik Tesisatı Tadilatı</option>
+                                    <option value="aydinlatma">Aydınlatma Tasarımı & Montajı</option>
+                                    <option value="akilliev">Akıllı Ev Sistemleri</option>
+                                    <option value="ariza">Genel Arıza ve Güvenlik Kontrolü</option>
+                                    <option value="diger">Diğer Projeler</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="consult-details" class="form-input" placeholder="Projeniz hakkında detaylar (örneğin oda sayısı, istekleriniz)" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn--primary">Danışmanlık Talebi Gönder</button>
+                        <div class="form-message" id="consult-message"></div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
         <section id="iletisim" class="section section--secondary reveal-on-scroll">
             <div class="container">
                 <div class="section-header">
@@ -241,8 +248,9 @@
 
     <!-- Glassmorphic Curtain Wipe Transition -->
     <div class="glass-transition" id="glass-transition">
-        <div class="glass-transition__panel glass-transition__panel--left"></div>
-        <div class="glass-transition__panel glass-transition__panel--right"></div>
+        <div class="glass-transition__column" style="--col-index: 0;"></div>
+        <div class="glass-transition__column" style="--col-index: 1;"></div>
+        <div class="glass-transition__column" style="--col-index: 2;"></div>
     </div>
 
     <!-- Scripts -->

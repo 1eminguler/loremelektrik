@@ -69,18 +69,46 @@ document.addEventListener('DOMContentLoaded', () => {
       const message = document.getElementById('message').value.trim();
 
       if (!name || !email || !message) {
-        showFeedback('Lütfen tüm zorunlu alanları doldurun.', 'error');
+        showFeedback(formMessage, 'Lütfen tüm zorunlu alanları doldurun.', 'error');
         return;
       }
 
       if (!isValidEmail(email)) {
-        showFeedback('Geçersiz bir e-posta adresi girdiniz.', 'error');
+        showFeedback(formMessage, 'Geçersiz bir e-posta adresi girdiniz.', 'error');
         return;
       }
 
-      // Simulate API submit
-      showFeedback('Mesajınız başarıyla gönderildi. En kısa sürede sizinle iletişime geçeceğiz.', 'success');
+      showFeedback(formMessage, 'Mesajınız başarıyla gönderildi. En kısa sürede sizinle iletişime geçeceğiz.', 'success');
       contactForm.reset();
+    });
+  }
+
+  // Consult Form Validation and Submission
+  const consultForm = document.querySelector('.consult__form');
+  const consultMessage = document.getElementById('consult-message');
+
+  if (consultForm) {
+    consultForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const name = document.getElementById('consult-name').value.trim();
+      const email = document.getElementById('consult-email').value.trim();
+      const phone = document.getElementById('consult-phone').value.trim();
+      const type = document.getElementById('consult-type').value;
+      const details = document.getElementById('consult-details').value.trim();
+
+      if (!name || !email || !phone || !type || !details) {
+        showFeedback(consultMessage, 'Lütfen tüm alanları doldurun.', 'error');
+        return;
+      }
+
+      if (!isValidEmail(email)) {
+        showFeedback(consultMessage, 'Geçersiz bir e-posta adresi girdiniz.', 'error');
+        return;
+      }
+
+      showFeedback(consultMessage, 'Talebiniz başarıyla alındı. Elektrikçimiz en kısa sürede sizi arayacaktır.', 'success');
+      consultForm.reset();
     });
   }
 
@@ -88,20 +116,66 @@ document.addEventListener('DOMContentLoaded', () => {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   };
 
-  const showFeedback = (text, type) => {
-    formMessage.textContent = text;
-    formMessage.className = 'form-message'; // Clear types
-    formMessage.classList.add(`form-message--${type}`);
+  const showFeedback = (container, text, type) => {
+    container.textContent = text;
+    container.className = 'form-message'; // Clear types
+    container.classList.add(`form-message--${type}`);
     
-    // Auto hide error after some time, success stays visible
     if (type === 'error') {
       setTimeout(() => {
-        formMessage.style.display = 'none';
+        container.style.display = 'none';
       }, 5000);
     }
   };
 
-  // 5. Glassmorphic Page/Section Transition
+  // 5. Interactive Lightbulb Distance Glow Script
+  const bulbContainer = document.getElementById('hero-bulb-container');
+  if (bulbContainer) {
+    const bulbGlow = bulbContainer.querySelector('.bulb-glow');
+    const bulbFilament = bulbContainer.querySelector('.bulb-filament');
+    const bulbRays = bulbContainer.querySelector('.bulb-rays');
+    const bulbOutline = bulbContainer.querySelector('.bulb-outline');
+
+    document.addEventListener('mousemove', (e) => {
+      const rect = bulbContainer.getBoundingClientRect();
+      const bulbX = rect.left + rect.width / 2;
+      const bulbY = rect.top + rect.height / 2;
+
+      const dx = e.clientX - bulbX;
+      const dy = e.clientY - bulbY;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+
+      // Glow influence range is 400px
+      const maxGlowDist = 400;
+      let intensity = 0;
+      if (distance < maxGlowDist) {
+        intensity = (1 - (distance / maxGlowDist)) ** 2; // quadratic curve for smoother feel
+      }
+
+      // Add a tiny baseline glow so it's not pitch black
+      const finalGlow = Math.max(intensity, 0.08);
+
+      // Update elements dynamically
+      bulbGlow.setAttribute('opacity', finalGlow * 0.9);
+      bulbGlow.style.filter = `drop-shadow(0 0 ${finalGlow * 35}px var(--accent))`;
+      
+      if (intensity > 0.05) {
+        bulbOutline.style.stroke = 'var(--accent)';
+        bulbOutline.style.filter = `drop-shadow(0 0 ${intensity * 8}px var(--accent))`;
+        bulbFilament.style.stroke = 'var(--accent)';
+        bulbFilament.style.filter = `drop-shadow(0 0 ${intensity * 12}px var(--accent))`;
+        bulbRays.style.opacity = intensity * 1.2;
+      } else {
+        bulbOutline.style.stroke = '#fff';
+        bulbOutline.style.filter = 'none';
+        bulbFilament.style.stroke = '#888';
+        bulbFilament.style.filter = 'none';
+        bulbRays.style.opacity = 0.1;
+      }
+    });
+  }
+
+  // 6. Glassmorphic Staggered Page/Section Transition
   const transitionOverlay = document.getElementById('glass-transition');
   const internalLinks = document.querySelectorAll('a[href^="#"]');
 
@@ -114,10 +188,11 @@ document.addEventListener('DOMContentLoaded', () => {
       if (targetSection) {
         e.preventDefault();
 
-        // 1. Slide panels in (meet in the middle) and apply blur
+        // 1. Slide columns down sequentially
+        transitionOverlay.classList.remove('glass-transition--active-out');
         transitionOverlay.classList.add('glass-transition--active');
 
-        // 2. Teleport scroll position instantly in the middle of transition
+        // 2. Midway through transitions, teleport scroll instantly
         setTimeout(() => {
           document.documentElement.style.scrollBehavior = 'auto';
           targetSection.scrollIntoView({ block: 'start' });
@@ -128,12 +203,13 @@ document.addEventListener('DOMContentLoaded', () => {
             link.classList.add('header__link--active');
           }
           document.documentElement.style.scrollBehavior = 'smooth';
-        }, 300);
+        }, 450);
 
-        // 3. Slide panels away
+        // 3. Slide columns out downwards
         setTimeout(() => {
+          transitionOverlay.classList.add('glass-transition--active-out');
           transitionOverlay.classList.remove('glass-transition--active');
-        }, 800);
+        }, 850);
       }
     });
   });
