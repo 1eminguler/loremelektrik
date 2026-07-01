@@ -34,14 +34,35 @@
 
     <main>
         <section class="hero">
-            <div class="container">
-                <div class="hero__content">
-                    <span class="hero__badge">Güvenilir Enerji Altyapıları</span>
-                    <h1 class="hero__title">Modern Endüstriyel Tesisler ve <span>Akıllı Evler</span></h1>
+            <div class="container hero__container-split">
+                <div class="hero__split-left">
+                    <div class="hero__canvas-container">
+                        <canvas id="energy-canvas"></canvas>
+                    </div>
+                    <span class="hero__badge">Baştan Sona Profosyonel Teknik Destek</span>
+                    <h1 class="hero__title">Modern Endüstriyel İnşaat ve <span>Tadilat</span></h1>
                     <p class="hero__desc">Lorem Elektrik olarak, 10 yılı aşkın tecrübemiz ve mühendislik odaklı vizyonumuzla yarının enerji altyapılarını güvenle inşa ediyoruz.</p>
                     <div class="hero__actions">
                         <a href="#hizmetler" class="btn btn--primary">Hizmetlerimiz</a>
                         <a href="#iletisim" class="btn btn--outline">Bizimle İletişime Geçin</a>
+                    </div>
+                </div>
+                
+                <div class="hero__divider">
+                    <svg viewBox="0 0 100 1000" preserveAspectRatio="none">
+                        <path class="hero__lightning-line" d="M50,0 L45,100 L55,200 L40,320 L60,450 L45,580 L55,700 L40,820 L50,1000" />
+                        <path class="hero__lightning-glow" d="M50,0 L45,100 L55,200 L40,320 L60,450 L45,580 L55,700 L40,820 L50,1000" />
+                    </svg>
+                </div>
+                
+                <div class="hero__split-right">
+                    <div class="hero__image-wrapper">
+                        <div class="hero__image-placeholder">
+                            <svg class="hero__image-icon" viewBox="0 0 24 24">
+                                <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
+                            </svg>
+                            <span>Şirket Görseli</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -184,5 +205,14 @@
             <p class="footer__text">&copy; 2026 Lorem Elektrik. Tüm Hakları Saklıdır.</p>
         </div>
     </footer>
+
+    <!-- Lightning Transition Overlay -->
+    <div class="lightning-transition" id="lightning-transition">
+        <div class="lightning-transition__flash"></div>
+        <svg class="lightning-transition__bolt" viewBox="0 0 200 1000" preserveAspectRatio="none">
+            <path class="lightning-transition__path" d="M100,-50 L120,150 L80,300 L140,450 L60,600 L130,750 L70,900 L100,1050" />
+            <path class="lightning-transition__glow" d="M100,-50 L120,150 L80,300 L140,450 L60,600 L130,750 L70,900 L100,1050" />
+        </svg>
+    </div>
 </body>
 </html>
