@@ -450,3 +450,126 @@ ul {
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
+
+/* Contact Section */
+.contact__grid {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 60px;
+}
+
+@media (max-width: 992px) {
+  .contact__grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+.contact__info {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.contact-card {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.contact-card__icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.contact-card__icon svg {
+  width: 20px;
+  height: 20px;
+  fill: var(--accent);
+}
+
+.contact-card__title {
+  font-size: 1.1rem;
+  margin-bottom: 6px;
+}
+
+.contact-card__detail {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.contact__form {
+  background-color: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  padding: 40px;
+  border-radius: 8px;
+}
+
+@media (max-width: 576px) {
+  .contact__form {
+    padding: 24px;
+  }
+}
+
+.form-group {
+  margin-bottom: 24px;
+}
+
+.form-input {
+  width: 100%;
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 14px 18px;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  transition: var(--transition-smooth);
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(234, 179, 8, 0.1);
+}
+
+textarea.form-input {
+  resize: vertical;
+  min-height: 120px;
+}
+
+/* Footer */
+.footer {
+  background-color: #0c0c0e;
+  border-top: 1px solid var(--border-color);
+  padding: 40px 0;
+  text-align: center;
+}
+
+.footer__logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.25rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.footer__logo svg {
+  fill: var(--accent);
+  width: 20px;
+  height: 20px;
+}
+
+.footer__text {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
