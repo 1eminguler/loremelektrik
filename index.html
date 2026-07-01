@@ -36,9 +36,6 @@
         <section class="hero">
             <div class="container hero__container-split">
                 <div class="hero__split-left">
-                    <div class="hero__canvas-container">
-                        <canvas id="energy-canvas"></canvas>
-                    </div>
                     <span class="hero__badge">Baştan Sona Profosyonel Teknik Destek</span>
                     <h1 class="hero__title">Modern Endüstriyel İnşaat ve <span>Tadilat</span></h1>
                     <p class="hero__desc">Lorem Elektrik olarak, 10 yılı aşkın tecrübemiz ve mühendislik odaklı vizyonumuzla yarının enerji altyapılarını güvenle inşa ediyoruz.</p>
@@ -206,13 +203,16 @@
         </div>
     </footer>
 
-    <!-- Screen Wipe Transition Overlay -->
-    <div class="transition-wipe" id="transition-wipe">
-        <div class="transition-wipe__panel"></div>
+    <!-- Lightning Transition Overlay -->
+    <div class="lightning-transition" id="lightning-transition">
+        <div class="lightning-transition__flash"></div>
+        <svg class="lightning-transition__bolt" viewBox="0 0 200 1000" preserveAspectRatio="none">
+            <path class="lightning-transition__path" d="M100,-50 L120,150 L80,300 L140,450 L60,600 L130,750 L70,900 L100,1050" />
+            <path class="lightning-transition__glow" d="M100,-50 L120,150 L80,300 L140,450 L60,600 L130,750 L70,900 L100,1050" />
+        </svg>
     </div>
 
     <!-- Scripts -->
-    <script src="node_modules/animejs/lib/anime.min.js"></script>
     <script src="js/main.js"></script>
 </body>
 </html>

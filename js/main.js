@@ -101,97 +101,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  // 5. Interactive Electric Canvas (Hero)
-  const canvas = document.getElementById('energy-canvas');
-  if (canvas) {
-    const ctx = canvas.getContext('2d');
-    let width = canvas.offsetWidth;
-    let height = canvas.offsetHeight;
-    canvas.width = width;
-    canvas.height = height;
-
-    const particles = [];
-    const particleCount = 45;
-    const maxDistance = 100;
-
-    class Particle {
-      constructor() {
-        this.x = Math.random() * width;
-        this.y = Math.random() * height;
-        this.vx = (Math.random() - 0.5) * 1.5;
-        this.vy = (Math.random() - 0.5) * 1.5;
-        this.radius = Math.random() * 2 + 1.5;
-      }
-
-      update() {
-        this.x += this.vx;
-        this.y += this.vy;
-
-        if (this.x < 0 || this.x > width) this.vx *= -1;
-        if (this.y < 0 || this.y > height) this.vy *= -1;
-      }
-
-      draw() {
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        ctx.fillStyle = '#eab308';
-        ctx.shadowColor = '#eab308';
-        ctx.shadowBlur = 8;
-        ctx.fill();
-        ctx.shadowBlur = 0; // Reset
-      }
-    }
-
-    for (let i = 0; i < particleCount; i++) {
-      particles.push(new Particle());
-    }
-
-    const animate = () => {
-      ctx.clearRect(0, 0, width, height);
-
-      particles.forEach(p => {
-        p.update();
-        p.draw();
-      });
-
-      // Draw connecting electrical arcs
-      for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
-          const dx = particles[i].x - particles[j].x;
-          const dy = particles[i].y - particles[j].y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-
-          if (dist < maxDistance) {
-            const alpha = (1 - dist / maxDistance) * 0.45;
-            ctx.beginPath();
-            ctx.moveTo(particles[i].x, particles[i].y);
-            ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.strokeStyle = `rgba(234, 179, 8, ${alpha})`;
-            ctx.lineWidth = 1;
-            ctx.stroke();
-          }
-        }
-      }
-
-      requestAnimationFrame(animate);
-    };
-
-    animate();
-
-    // Handle resize
-    window.addEventListener('resize', () => {
-      if (canvas.offsetWidth !== width || canvas.offsetHeight !== height) {
-        width = canvas.offsetWidth;
-        height = canvas.offsetHeight;
-        canvas.width = width;
-        canvas.height = height;
-      }
-    });
-  }
-
-  // 6. AnimeJS Page/Section Transition (Left-to-Right Swipe)
-  const transitionOverlay = document.getElementById('transition-wipe');
-  const transitionPanel = document.querySelector('.transition-wipe__panel');
+  // 5. Lightning Page/Section Transition
+  const transitionOverlay = document.getElementById('lightning-transition');
   const internalLinks = document.querySelectorAll('a[href^="#"]');
 
   internalLinks.forEach(link => {
@@ -203,80 +114,28 @@ document.addEventListener('DOMContentLoaded', () => {
       if (targetSection) {
         e.preventDefault();
 
-        // Prevent clicking other links during transition
-        document.body.style.pointerEvents = 'none';
+        // 1. Activate transition (starts flash & bolt CSS animation)
+        transitionOverlay.classList.add('lightning-transition--active');
 
-        // 1. Swipe in panel from left to right (to cover the screen)
-        anime({
-          targets: transitionPanel,
-          left: ['-100vw', '0vw'],
-          duration: 500,
-          easing: 'easeInQuad',
-          complete: () => {
-            // 2. Teleport scroll position to target section instantly
-            document.documentElement.style.scrollBehavior = 'auto';
-            targetSection.scrollIntoView({ block: 'start' });
+        // 2. Midway through the flash, scroll instantly to target
+        setTimeout(() => {
+          document.documentElement.style.scrollBehavior = 'auto';
+          targetSection.scrollIntoView({ block: 'start' });
 
-            // Update active link classes
-            navLinks.forEach(l => l.classList.remove('header__link--active'));
-            if (link.classList.contains('header__link')) {
-              link.classList.add('header__link--active');
-            }
-            document.documentElement.style.scrollBehavior = 'smooth';
-
-            // 3. Swipe out panel to the right (to reveal the target section)
-            anime({
-              targets: transitionPanel,
-              left: ['0vw', '100vw'],
-              duration: 500,
-              easing: 'easeOutQuad',
-              complete: () => {
-                // Reset panel position for next run
-                transitionPanel.style.left = '-100vw';
-                document.body.style.pointerEvents = '';
-              }
-            });
+          // Update active link classes
+          navLinks.forEach(l => l.classList.remove('header__link--active'));
+          if (link.classList.contains('header__link')) {
+            link.classList.add('header__link--active');
           }
-        });
+          document.documentElement.style.scrollBehavior = 'smooth';
+        }, 180);
+
+        // 3. Deactivate transition overlay when done (750ms total)
+        setTimeout(() => {
+          transitionOverlay.classList.remove('lightning-transition--active');
+        }, 750);
       }
     });
   });
-
-  // 7. Hero Entry Animation with AnimeJS
-  const heroLeft = document.querySelector('.hero__split-left');
-  const heroRight = document.querySelector('.hero__split-right');
-  const heroDivider = document.querySelector('.hero__divider');
-
-  if (heroLeft && heroRight && heroDivider) {
-    // Set initial styles for animation
-    heroLeft.style.opacity = 0;
-    heroRight.style.opacity = 0;
-    heroDivider.style.opacity = 0;
-
-    // Timeline for coordinated slide-in split
-    const tl = anime.timeline({
-      easing: 'easeOutExpo',
-      duration: 1000
-    });
-
-    tl.add({
-      targets: heroLeft,
-      translateX: [-100, 0],
-      opacity: [0, 1],
-      duration: 800
-    })
-    .add({
-      targets: heroRight,
-      translateX: [100, 0],
-      opacity: [0, 1],
-      duration: 800
-    }, '-=600')
-    .add({
-      targets: heroDivider,
-      scaleY: [0, 1],
-      opacity: [0, 1],
-      duration: 600
-    }, '-=600');
-  }
 });
 
