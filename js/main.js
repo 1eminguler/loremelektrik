@@ -101,8 +101,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  // 5. Lightning Page/Section Transition
-  const transitionOverlay = document.getElementById('lightning-transition');
+  // 5. Glassmorphic Page/Section Transition
+  const transitionOverlay = document.getElementById('glass-transition');
   const internalLinks = document.querySelectorAll('a[href^="#"]');
 
   internalLinks.forEach(link => {
@@ -114,10 +114,10 @@ document.addEventListener('DOMContentLoaded', () => {
       if (targetSection) {
         e.preventDefault();
 
-        // 1. Activate transition (starts flash & bolt CSS animation)
-        transitionOverlay.classList.add('lightning-transition--active');
+        // 1. Slide panels in (meet in the middle) and apply blur
+        transitionOverlay.classList.add('glass-transition--active');
 
-        // 2. Midway through the flash, scroll instantly to target
+        // 2. Teleport scroll position instantly in the middle of transition
         setTimeout(() => {
           document.documentElement.style.scrollBehavior = 'auto';
           targetSection.scrollIntoView({ block: 'start' });
@@ -128,12 +128,12 @@ document.addEventListener('DOMContentLoaded', () => {
             link.classList.add('header__link--active');
           }
           document.documentElement.style.scrollBehavior = 'smooth';
-        }, 180);
+        }, 300);
 
-        // 3. Deactivate transition overlay when done (750ms total)
+        // 3. Slide panels away
         setTimeout(() => {
-          transitionOverlay.classList.remove('lightning-transition--active');
-        }, 750);
+          transitionOverlay.classList.remove('glass-transition--active');
+        }, 800);
       }
     });
   });

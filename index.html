@@ -34,6 +34,10 @@
 
     <main>
         <section class="hero">
+            <!-- Floating Aura mesh glows -->
+            <div class="hero__aura-mesh"></div>
+            <div class="hero__aura-mesh hero__aura-mesh--secondary"></div>
+
             <div class="container hero__container-split">
                 <div class="hero__split-left">
                     <span class="hero__badge">Baştan Sona Profosyonel Teknik Destek</span>
@@ -45,20 +49,52 @@
                     </div>
                 </div>
                 
-                <div class="hero__divider">
-                    <svg viewBox="0 0 100 1000" preserveAspectRatio="none">
-                        <path class="hero__lightning-line" d="M50,0 L45,100 L55,200 L40,320 L60,450 L45,580 L55,700 L40,820 L50,1000" />
-                        <path class="hero__lightning-glow" d="M50,0 L45,100 L55,200 L40,320 L60,450 L45,580 L55,700 L40,820 L50,1000" />
-                    </svg>
-                </div>
-                
                 <div class="hero__split-right">
-                    <div class="hero__image-wrapper">
-                        <div class="hero__image-placeholder">
-                            <svg class="hero__image-icon" viewBox="0 0 24 24">
-                                <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
-                            </svg>
-                            <span>Şirket Görseli</span>
+                    <!-- Glassmorphic Cyber Card -->
+                    <div class="cyber-card">
+                        <div class="cyber-card__glow-mesh"></div>
+                        <div class="cyber-card__inner">
+                            <div class="cyber-card__header">
+                                <span class="cyber-card__dot cyber-card__dot--red"></span>
+                                <span class="cyber-card__dot cyber-card__dot--yellow"></span>
+                                <span class="cyber-card__dot cyber-card__dot--green"></span>
+                                <span class="cyber-card__title">LOREM SYSTEM CONTROL</span>
+                            </div>
+                            <div class="cyber-card__body">
+                                <!-- Glowing Circuit Board SVG -->
+                                <svg class="cyber-card__circuit" viewBox="0 0 400 300">
+                                    <!-- Grid lines for background -->
+                                    <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+                                        <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(255, 255, 255, 0.03)" stroke-width="1"/>
+                                    </pattern>
+                                    <rect width="100%" height="100%" fill="url(#grid)" />
+                                    
+                                    <!-- Circuit tracks -->
+                                    <path class="circuit-track circuit-track--1" d="M 50,50 L 150,50 L 200,100 L 200,200 L 250,250 L 350,250" />
+                                    <path class="circuit-track circuit-track--2" d="M 50,250 L 120,250 L 170,200 L 170,100 L 220,50 L 350,50" />
+                                    <path class="circuit-track circuit-track--3" d="M 50,150 L 350,150" />
+                                    
+                                    <!-- Moving energy pulse particles -->
+                                    <circle class="circuit-pulse circuit-pulse--1" r="4" fill="#ff9f0a" />
+                                    <circle class="circuit-pulse circuit-pulse--2" r="4" fill="#00f2fe" />
+                                    <circle class="circuit-pulse circuit-pulse--3" r="3.5" fill="#30d158" />
+                                    
+                                    <!-- Glowing nodes -->
+                                    <circle cx="50" cy="50" r="5" fill="#ff9f0a" class="circuit-node" />
+                                    <circle cx="350" cy="250" r="5" fill="#ff9f0a" class="circuit-node" />
+                                    <circle cx="50" cy="250" r="5" fill="#00f2fe" class="circuit-node" />
+                                    <circle cx="350" cy="50" r="5" fill="#00f2fe" class="circuit-node" />
+                                    <circle cx="50" cy="150" r="5" fill="#30d158" class="circuit-node" />
+                                    <circle cx="350" cy="150" r="5" fill="#30d158" class="circuit-node" />
+                                </svg>
+                                <div class="cyber-card__status">
+                                    <div class="status-indicator">
+                                        <span class="status-indicator__pulse"></span>
+                                        <span class="status-indicator__text">GÜÇ AKIŞI AKTİF</span>
+                                    </div>
+                                    <div class="status-metric">230V / 50Hz</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -203,13 +239,10 @@
         </div>
     </footer>
 
-    <!-- Lightning Transition Overlay -->
-    <div class="lightning-transition" id="lightning-transition">
-        <div class="lightning-transition__flash"></div>
-        <svg class="lightning-transition__bolt" viewBox="0 0 200 1000" preserveAspectRatio="none">
-            <path class="lightning-transition__path" d="M100,-50 L120,150 L80,300 L140,450 L60,600 L130,750 L70,900 L100,1050" />
-            <path class="lightning-transition__glow" d="M100,-50 L120,150 L80,300 L140,450 L60,600 L130,750 L70,900 L100,1050" />
-        </svg>
+    <!-- Glassmorphic Curtain Wipe Transition -->
+    <div class="glass-transition" id="glass-transition">
+        <div class="glass-transition__panel glass-transition__panel--left"></div>
+        <div class="glass-transition__panel glass-transition__panel--right"></div>
     </div>
 
     <!-- Scripts -->
