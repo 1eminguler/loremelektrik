@@ -585,3 +585,26 @@ textarea.form-input {
   opacity: 1;
   transform: translateY(0);
 }
+
+/* Form validation messages */
+.form-message {
+  margin-top: 16px;
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  display: none;
+}
+
+.form-message--success {
+  display: block;
+  background-color: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  color: #10b981;
+}
+
+.form-message--error {
+  display: block;
+  background-color: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #ef4444;
+}

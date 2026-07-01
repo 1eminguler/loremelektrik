@@ -55,4 +55,49 @@ document.addEventListener('DOMContentLoaded', () => {
   revealElements.forEach(element => {
     revealObserver.observe(element);
   });
+
+  // Contact Form Validation and Submission
+  const contactForm = document.querySelector('.contact__form');
+  const formMessage = document.querySelector('.form-message');
+
+  if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const message = document.getElementById('message').value.trim();
+
+      if (!name || !email || !message) {
+        showFeedback('Lütfen tüm zorunlu alanları doldurun.', 'error');
+        return;
+      }
+
+      if (!isValidEmail(email)) {
+        showFeedback('Geçersiz bir e-posta adresi girdiniz.', 'error');
+        return;
+      }
+
+      // Simulate API submit
+      showFeedback('Mesajınız başarıyla gönderildi. En kısa sürede sizinle iletişime geçeceğiz.', 'success');
+      contactForm.reset();
+    });
+  }
+
+  const isValidEmail = (email) => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  };
+
+  const showFeedback = (text, type) => {
+    formMessage.textContent = text;
+    formMessage.className = 'form-message'; // Clear types
+    formMessage.classList.add(`form-message--${type}`);
+    
+    // Auto hide error after some time, success stays visible
+    if (type === 'error') {
+      setTimeout(() => {
+        formMessage.style.display = 'none';
+      }, 5000);
+    }
+  };
 });
