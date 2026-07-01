@@ -190,6 +190,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // 6. Glassmorphic Staggered Page/Section Transition
   const transitionOverlay = document.getElementById('glass-transition');
   const internalLinks = document.querySelectorAll('a[href^="#"]');
+  let isTransitioning = false;
 
   internalLinks.forEach(link => {
     link.addEventListener('click', (e) => {
@@ -198,6 +199,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // Handle Ana Sayfa / Top scroll jump
       if (targetId === '#') {
         e.preventDefault();
+        isTransitioning = true;
         
         transitionOverlay.classList.remove('glass-transition--active-out');
         transitionOverlay.classList.add('glass-transition--active');
@@ -214,6 +216,7 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
           transitionOverlay.classList.add('glass-transition--active-out');
           transitionOverlay.classList.remove('glass-transition--active');
+          isTransitioning = false;
         }, 850);
         return;
       }
@@ -221,6 +224,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const targetSection = document.querySelector(targetId);
       if (targetSection) {
         e.preventDefault();
+        isTransitioning = true;
 
         // 1. Slide columns down sequentially
         transitionOverlay.classList.remove('glass-transition--active-out');
@@ -243,6 +247,7 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
           transitionOverlay.classList.add('glass-transition--active-out');
           transitionOverlay.classList.remove('glass-transition--active');
+          isTransitioning = false;
         }, 850);
       }
     });
@@ -252,6 +257,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const mainSections = document.querySelectorAll('main > section[id]');
   
   const updateActiveLink = () => {
+    if (isTransitioning) return;
     const scrollPosition = window.scrollY + 160;
 
     // Force Ana Sayfa active when scrolled to the top
