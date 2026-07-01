@@ -189,45 +189,94 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 6. Lightning Page/Section Transition
-  const transitionOverlay = document.getElementById('lightning-transition');
+  // 6. AnimeJS Page/Section Transition (Left-to-Right Swipe)
+  const transitionOverlay = document.getElementById('transition-wipe');
+  const transitionPanel = document.querySelector('.transition-wipe__panel');
   const internalLinks = document.querySelectorAll('a[href^="#"]');
 
   internalLinks.forEach(link => {
     link.addEventListener('click', (e) => {
       const targetId = link.getAttribute('href');
-      if (targetId === '#') return; // Ignore home top jumps
+      if (targetId === '#') return; // Ignore empty jumps
 
       const targetSection = document.querySelector(targetId);
       if (targetSection) {
         e.preventDefault();
 
-        // 1. Activate transition (starts flash & bolt animation)
-        transitionOverlay.classList.add('lightning-transition--active');
+        // Prevent clicking other links during transition
+        document.body.style.pointerEvents = 'none';
 
-        // 2. Midway through the animation (around 220ms), scroll instantly to target
-        setTimeout(() => {
-          // Temporarily disable smooth scroll to make the transition feel like a jump reveal
-          document.documentElement.style.scrollBehavior = 'auto';
-          
-          targetSection.scrollIntoView({ block: 'start' });
-          
-          // Update active link classes
-          navLinks.forEach(l => l.classList.remove('header__link--active'));
-          if (link.classList.contains('header__link')) {
-            link.classList.add('header__link--active');
+        // 1. Swipe in panel from left to right (to cover the screen)
+        anime({
+          targets: transitionPanel,
+          left: ['-100vw', '0vw'],
+          duration: 500,
+          easing: 'easeInQuad',
+          complete: () => {
+            // 2. Teleport scroll position to target section instantly
+            document.documentElement.style.scrollBehavior = 'auto';
+            targetSection.scrollIntoView({ block: 'start' });
+
+            // Update active link classes
+            navLinks.forEach(l => l.classList.remove('header__link--active'));
+            if (link.classList.contains('header__link')) {
+              link.classList.add('header__link--active');
+            }
+            document.documentElement.style.scrollBehavior = 'smooth';
+
+            // 3. Swipe out panel to the right (to reveal the target section)
+            anime({
+              targets: transitionPanel,
+              left: ['0vw', '100vw'],
+              duration: 500,
+              easing: 'easeOutQuad',
+              complete: () => {
+                // Reset panel position for next run
+                transitionPanel.style.left = '-100vw';
+                document.body.style.pointerEvents = '';
+              }
+            });
           }
-          
-          // Re-enable smooth scroll
-          document.documentElement.style.scrollBehavior = 'smooth';
-        }, 220);
-
-        // 3. Deactivate transition overlay when done (750ms total animation time)
-        setTimeout(() => {
-          transitionOverlay.classList.remove('lightning-transition--active');
-        }, 750);
+        });
       }
     });
   });
+
+  // 7. Hero Entry Animation with AnimeJS
+  const heroLeft = document.querySelector('.hero__split-left');
+  const heroRight = document.querySelector('.hero__split-right');
+  const heroDivider = document.querySelector('.hero__divider');
+
+  if (heroLeft && heroRight && heroDivider) {
+    // Set initial styles for animation
+    heroLeft.style.opacity = 0;
+    heroRight.style.opacity = 0;
+    heroDivider.style.opacity = 0;
+
+    // Timeline for coordinated slide-in split
+    const tl = anime.timeline({
+      easing: 'easeOutExpo',
+      duration: 1000
+    });
+
+    tl.add({
+      targets: heroLeft,
+      translateX: [-100, 0],
+      opacity: [0, 1],
+      duration: 800
+    })
+    .add({
+      targets: heroRight,
+      translateX: [100, 0],
+      opacity: [0, 1],
+      duration: 800
+    }, '-=600')
+    .add({
+      targets: heroDivider,
+      scaleY: [0, 1],
+      opacity: [0, 1],
+      duration: 600
+    }, '-=600');
+  }
 });
 
