@@ -23,6 +23,6 @@ Thumbs.db
 *.sln
 *.sw?
 
-# AI / Agent files
+# Local configurations
 .agents/
 skills-lock.json
