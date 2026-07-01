@@ -198,3 +198,115 @@ ul {
     font-size: 1.2rem;
   }
 }
+
+/* Button styles */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 28px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  border: 2px solid transparent;
+}
+
+.btn--primary {
+  background-color: var(--accent);
+  color: var(--bg-primary);
+}
+
+.btn--primary:hover {
+  background-color: var(--accent-hover);
+  transform: translateY(-2px);
+}
+
+.btn--outline {
+  border-color: var(--border-color);
+  background-color: transparent;
+  color: var(--text-primary);
+}
+
+.btn--outline:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-2px);
+}
+
+/* Hero Section */
+.hero {
+  height: 100vh;
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  background-image: linear-gradient(rgba(18, 18, 20, 0.75), rgba(18, 18, 20, 0.95)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M0 0h100v100H0z" fill="%23121214"/><path d="M0 50h100M50 0v100" stroke="%231a1a1e" stroke-width="1"/></svg>');
+  background-size: cover;
+  background-position: center;
+  padding-top: var(--header-height);
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 150px;
+  background: linear-gradient(transparent, var(--bg-primary));
+  pointer-events: none;
+}
+
+.hero__content {
+  max-width: 720px;
+}
+
+.hero__badge {
+  display: inline-flex;
+  padding: 6px 14px;
+  background-color: rgba(234, 179, 8, 0.1);
+  border: 1px solid rgba(234, 179, 8, 0.25);
+  color: var(--accent);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-radius: 30px;
+  margin-bottom: 24px;
+}
+
+.hero__title {
+  font-size: 3.5rem;
+  line-height: 1.15;
+  margin-bottom: 24px;
+}
+
+.hero__title span {
+  color: var(--accent);
+}
+
+.hero__desc {
+  font-size: 1.15rem;
+  color: var(--text-muted);
+  margin-bottom: 40px;
+  max-width: 620px;
+}
+
+.hero__actions {
+  display: flex;
+  gap: 16px;
+}
+
+@media (max-width: 768px) {
+  .hero__title {
+    font-size: 2.5rem;
+  }
+  .hero__desc {
+    font-size: 1rem;
+  }
+  .hero__actions {
+    flex-direction: column;
+  }
+}
