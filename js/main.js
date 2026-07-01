@@ -96,6 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const phone = document.getElementById('consult-phone').value.trim();
       const type = document.getElementById('consult-type').value;
       const details = document.getElementById('consult-details').value.trim();
+      const fileInput = document.getElementById('consult-file');
 
       if (!name || !email || !phone || !type || !details) {
         showFeedback(consultMessage, 'Lütfen tüm alanları doldurun.', 'error');
@@ -107,7 +108,18 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
-      showFeedback(consultMessage, 'Talebiniz başarıyla alındı. Elektrikçimiz en kısa sürede sizi arayacaktır.', 'success');
+      // Check file size if a file is uploaded
+      if (fileInput && fileInput.files.length > 0) {
+        const file = fileInput.files[0];
+        const maxSizeBytes = 5 * 1024 * 1024; // 5MB
+
+        if (file.size > maxSizeBytes) {
+          showFeedback(consultMessage, 'Yüklenen dosya boyutu 5MB\'dan büyük olamaz.', 'error');
+          return;
+        }
+      }
+
+      showFeedback(consultMessage, 'Proje talebiniz ve dosyanız başarıyla alındı. Elektrikçimiz detaylı teklifle dönüş yapacaktır.', 'success');
       consultForm.reset();
     });
   }

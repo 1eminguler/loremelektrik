@@ -330,11 +330,13 @@ ul {
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
   z-index: 10;
   transition: transform 0.2s ease-out;
+  overflow: visible;
 }
 
 .hero__bulb-svg {
   width: 65px;
   height: 65px;
+  overflow: visible;
 }
 
 .bulb-glow {
@@ -586,6 +588,36 @@ select.form-input option {
     grid-template-columns: 1fr;
     gap: 0;
   }
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.form-input--file {
+  padding: 10px 14px;
+  font-size: 0.85rem;
+}
+
+.form-input--file::-webkit-file-upload-button {
+  background-color: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 12px;
+  transition: var(--transition-smooth);
+}
+
+.form-input--file::-webkit-file-upload-button:hover {
+  background-color: var(--accent);
+  color: #000;
+  border-color: var(--accent);
 }
 
 /* Contact Section */
